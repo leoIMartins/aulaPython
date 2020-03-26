@@ -10,22 +10,22 @@ carros.append('Golf\n')
 arq.writelines(carros)
 arq.close()
 
-'''arq2 = open('C:\\Users\\lmartins8\\projetos\\aulapython01\\Aula 3 - Exercícios\\carros em ordem inversa.txt', 'w')
+'''arq2 = open('C:\\Python\\Aula 3 - Exercícios\\carros em ordem inversa.txt', 'w')
 carrosOrdemInversa = sorted(carros, reverse=True)
 arq2.writelines(carrosOrdemInversa)
 arq.close'''
 
-arq2 = open('C:\\Users\\lmartins8\\projetos\\aulapython01\\Aula 3 - Exercícios\\carros em ordem inversa.txt', 'w')
+arq2 = open('C:\\Python\\Aula 3 - Exercícios\\carros em ordem inversa.txt', 'w')
 carrosOrdemInversa = carros[::-1]
 arq2.writelines(carrosOrdemInversa)
 arq.close
 
-arq3 = open('C:\\Users\\lmartins8\\projetos\\aulapython01\\Aula 3 - Exercícios\\carros em ordem alfabetica.txt', 'w')
+arq3 = open('C:\\Python\\Aula 3 - Exercícios\\carros em ordem alfabetica.txt', 'w')
 carrosOrdemAlfabetica = sorted(carros)
 arq3.writelines(carrosOrdemAlfabetica)
 arq.close
 
-arq4 = open('C:\\Users\\lmartins8\\projetos\\aulapython01\\Aula 3 - Exercícios\\carros numerados.txt', 'w')
+arq4 = open('C:\\Python\\Aula 3 - Exercícios\\carros numerados.txt', 'w')
 i = 1
 carrosNumerados = []
 for cars in carrosOrdemAlfabetica:
