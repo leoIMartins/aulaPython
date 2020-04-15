@@ -2,31 +2,47 @@ import random
 
 numeros = []
 numerosSorteio = []
+numerosOrdenados = []
+jogosRealizados = []
 
 def escolherNumeros():
     i = 1
     while len(numeros) < 6:
         numero = int(input("\nDigite o %dº número: " % i))
         if numeros.__contains__(numero):
-            return print("Os números não podem se repetir")
+            print("Os números não podem se repetir")
         elif numero < 1 or numero > 60:
-            return print("Informe apenas números entre 1 e 60")
+            print("Informe apenas números entre 1 e 60")
         else:
             numeros.append(numero)
             i += 1
 
 
 def gerarJogo():
+    if len(numerosSorteio) > 1:
+        del numerosSorteio[:]
     while len(numerosSorteio) < 6:
         sorteio = random.randint(1, 60)
         if numerosSorteio.__contains__(sorteio):
-            break
+            continue
         else:
             numerosSorteio.append(sorteio)
-    return numerosSorteio
+    if jogosRealizados.__contains__(sorted(numerosSorteio)):
+        gerarJogo()
+    else:
+        jogosRealizados.append(sorted(numerosSorteio))
+        return numerosSorteio
 
-escolherNumeros()
-sorteioMegaSena = gerarJogo()
 
-print("\nOs números escolhidos foram: " + str(numeros))
-print("Os números sorteados foram: " + str(sorteioMegaSena))
+def tentaAcertar():
+    escolherNumeros()
+    while sorted(numeros) != sorted(numerosSorteio):
+        gerarJogo()
+        numerosOrdenados = sorted(numerosSorteio)
+        print(numerosOrdenados)
+    print("VOCÊ GANHOU NA MEGA SENA!!!!!")
+    print("\n\nJogo feito: " + str(sorted(numeros)))
+    print("Números da mega sena: " + str(numerosOrdenados))
+
+
+tentaAcertar()
