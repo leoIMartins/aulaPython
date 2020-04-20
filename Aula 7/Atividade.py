@@ -219,6 +219,14 @@ def excluir(pessoa, tudo):
             mycolLivros.delete_one(livro_escolhido)
 
 
+def consultar_pessoa():
+    pass
+
+
+def consultar_livro():
+    pass
+
+
 while True:
     option = input("\n1 - Inserir registro\n"
                    "2 - Alterar registro\n"
@@ -296,10 +304,29 @@ while True:
             continue
 
     elif option == "4":
-        pass
+        table_consulta = input("\n1 - Consultar pessoa\n"
+                               "2 - Consultar livro\n"
+                               "Informe qualquer outro caractere para voltar ao menu\n"
+                               "Opção escolhida: ")
+        if table_consulta == "1":
+            opcao = input("\n1 - Consultar todas as pessoas\n"
+                          "2 - Consultar pessoa específica\n"
+                          "Informe qualquer outro caractere para voltar\n"
+                          "Opção escolhida: ")
+            if opcao == 1:
+                consultar_pessoa()
+            elif opcao == 2:
+                consultar_pessoa()
 
-    elif option == "0":
-        break
+        if table_consulta == "2":
+            opcao = input("\n1 - Consultar todos os livros\n"
+                          "2 - Consultar livro específico\n"
+                          "Informe qualquer outro caractere para voltar\n"
+                          "Opção escolhida: ")
+            if opcao == 1:
+                consultar_livro()
+            elif opcao == 2:
+                consultar_livro()
 
-    else:
-        print("Informe uma opção válida")
+        else:
+            continue
