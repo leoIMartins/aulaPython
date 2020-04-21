@@ -199,7 +199,7 @@ def alterar_livro():
 def excluir(pessoa, tudo):
     if pessoa:
         if tudo:
-            x = mycolPessoa.delete_many({})
+            mycolPessoa.delete_many({})
         else:
             exibir_registros(True)
 
@@ -207,7 +207,7 @@ def excluir(pessoa, tudo):
             mycolPessoa.delete_one(pessoa_escolhida)
     else:
         if tudo:
-            x = mycolLivros.delete_many({})
+            mycolLivros.delete_many({})
         else:
             livros_cadastrados = mycolLivros.find({}, {"_id": 0}).sort("titulo", 1)
             i = 1
@@ -219,12 +219,47 @@ def excluir(pessoa, tudo):
             mycolLivros.delete_one(livro_escolhido)
 
 
-def consultar_pessoa():
-    pass
+def consultar(pessoa, tudo):
+    if pessoa:
+        if tudo:
+            pessoas_cadastradas = mycolPessoa.find().sort("name", 1)
 
+            for p in pessoas_cadastradas:
+                print(p)
 
-def consultar_livro():
-    pass
+        else:
+            filtro = {input(
+                "\nInforme o atributo (exatamente como está abaixo) de pessoa a ser utilizado como"
+                " parâmetro na consulta:\n"
+                "nome || telefone || cidade || endereço || email || nome_pai || nome_mae\n"
+                "Atributo escolhido: "): input("Informe o valor do atributo a ser pesquisado: ")}
+            '''print("Digite 0 para NÃO exibir a coluna, ou 1 para exbi-la")
+            colunas_consulta = {"nome": int(input("Coluna 'Nome': ")),
+                                "telefone": int(input("Coluna 'Telefone': ")),
+                                "cidade": int(input("Coluna 'Cidade': ")),
+                                "endereco": int(input("Coluna 'Endereço': ")),
+                                "email": int(input("Coluna 'E-mail': ")),
+                                "nome_pai": int(input("Coluna 'Nome do pai': ")),
+                                "nome_mae": int(input("Coluna 'Nome da mãe': "))}'''
+
+            for c in mycolPessoa.find(filtro):
+                print(c)
+    else:
+        if tudo:
+            livros_cadastrados = mycolLivros.find().sort("titulo", 1)
+
+            for l in livros_cadastrados:
+                print(l)
+
+        else:
+            filtro = {input(
+                "\nInforme o atributo (exatamente como está abaixo) de pessoa a ser utilizado como"
+                " parâmetro na consulta:\n"
+                "titulo || descricao || anolancamento || autor || editora || qtdpaginas || categoria\n\n"
+                "Atributo escolhido: "): input("Informe o valor do atributo a ser pesquisado: ")}
+
+            for c in mycolLivros.find(filtro):
+                print(c)
 
 
 while True:
@@ -310,23 +345,26 @@ while True:
                                "Opção escolhida: ")
         if table_consulta == "1":
             opcao = input("\n1 - Consultar todas as pessoas\n"
-                          "2 - Consultar pessoa específica\n"
+                          "2 - Consultar personalizada\n"
                           "Informe qualquer outro caractere para voltar\n"
                           "Opção escolhida: ")
-            if opcao == 1:
-                consultar_pessoa()
-            elif opcao == 2:
-                consultar_pessoa()
+            if opcao == "1":
+                consultar(True, True)
+            elif opcao == "2":
+                consultar(True, False)
 
         if table_consulta == "2":
             opcao = input("\n1 - Consultar todos os livros\n"
-                          "2 - Consultar livro específico\n"
+                          "2 - Consulta personalizada\n"
                           "Informe qualquer outro caractere para voltar\n"
                           "Opção escolhida: ")
-            if opcao == 1:
-                consultar_livro()
-            elif opcao == 2:
-                consultar_livro()
-
+            if opcao == "1":
+                consultar(False, True)
+            elif opcao == "2":
+                consultar(False, False)
         else:
             continue
+    elif option == "0":
+        break
+    else:
+        print("Informe uma opção válida!")
