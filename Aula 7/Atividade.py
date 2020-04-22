@@ -1,4 +1,6 @@
 import pymongo
+import time
+from bson import ObjectId
 
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 mydb = myclient["mydatabaseatividade"]
@@ -133,17 +135,13 @@ listaLivros = [
 
 def exibir_registros(pessoa):
     if pessoa:
-        pessoas_cadastradas = mycolPessoa.find({}, {"_id": 0}).sort("nome", 1)
-        i = 1
+        pessoas_cadastradas = mycolPessoa.find().sort("nome", 1)
         for p in pessoas_cadastradas:
-            print(str(i) + " - " + str(p))
-            i += 1
+            print(p)
     else:
-        livros_cadastrados = mycolLivros.find({}, {"_id": 0}).sort("titulo", 1)
-        i = 1
-        for l in livros_cadastrados:
-            print(str(i) + " - " + str(l))
-            i += 1
+        livros_cadastrados = mycolLivros.find().sort("titulo", 1)
+        for c in livros_cadastrados:
+            print(c)
 
 
 def inserir_pessoa():
@@ -175,7 +173,7 @@ def inserir_massa_teste():
 
 def alterar_pessoa():
     exibir_registros(True)
-    pessoa_escolhida = {"telefone": input("\nInforme o telefone da pessoa que quer alterar: ")}
+    pessoa_escolhida = {"_id": ObjectId(input("Informe o ID da pessoa a ser alterada: "))}
     atributo_escollhido = input("\nInforme o atributo (exatamente como está abaixo) a ser alterado na pessoa:\n"
                                 "nome || telefone || cidade || endereço || email || nome_pai || nome_mae\n"
                                 "Atributo escolhido: ")
@@ -187,7 +185,7 @@ def alterar_pessoa():
 def alterar_livro():
     exibir_registros(False)
 
-    livro_escolhido = {"titulo": input("\nInforme o título do livro que quer alterar: ")}
+    livro_escolhido = {"_id": ObjectId(input("Informe o ID do livro a ser alterado: "))}
     atributo_escollhido = input("\nInforme o atributo (exatamente como está abaixo) a ser alterado no livro:\n"
                                 "titulo || descricao || anolancamento || autor || editora || qtdpaginas || categoria\n"
                                 "Atributo escolhido: ")
@@ -202,21 +200,13 @@ def excluir(pessoa, tudo):
             mycolPessoa.delete_many({})
         else:
             exibir_registros(True)
-
-            pessoa_escolhida = {"nome": input("\nInforme o nome da pessoa que quer excluir: ")}
-            mycolPessoa.delete_one(pessoa_escolhida)
+            mycolPessoa.delete_one({"_id": ObjectId(input("Informe o ID da pessoa a ser excluída: "))})
     else:
         if tudo:
             mycolLivros.delete_many({})
         else:
-            livros_cadastrados = mycolLivros.find({}, {"_id": 0}).sort("titulo", 1)
-            i = 1
-            for l in livros_cadastrados:
-                print(str(i) + " - " + str(l))
-                i += 1
-
-            livro_escolhido = {"titulo": input("\nInforme o título do livro que quer excluir: ")}
-            mycolLivros.delete_one(livro_escolhido)
+            exibir_registros(False)
+            mycolLivros.delete_one({"_id": ObjectId(input("Informe o ID do livro a ser excluído: "))})
 
 
 def consultar(pessoa, tudo):
@@ -233,14 +223,6 @@ def consultar(pessoa, tudo):
                 " parâmetro na consulta:\n"
                 "nome || telefone || cidade || endereço || email || nome_pai || nome_mae\n"
                 "Atributo escolhido: "): input("Informe o valor do atributo a ser pesquisado: ")}
-            '''print("Digite 0 para NÃO exibir a coluna, ou 1 para exbi-la")
-            colunas_consulta = {"nome": int(input("Coluna 'Nome': ")),
-                                "telefone": int(input("Coluna 'Telefone': ")),
-                                "cidade": int(input("Coluna 'Cidade': ")),
-                                "endereco": int(input("Coluna 'Endereço': ")),
-                                "email": int(input("Coluna 'E-mail': ")),
-                                "nome_pai": int(input("Coluna 'Nome do pai': ")),
-                                "nome_mae": int(input("Coluna 'Nome da mãe': "))}'''
 
             for c in mycolPessoa.find(filtro):
                 print(c)
@@ -248,8 +230,8 @@ def consultar(pessoa, tudo):
         if tudo:
             livros_cadastrados = mycolLivros.find().sort("titulo", 1)
 
-            for l in livros_cadastrados:
-                print(l)
+            for c in livros_cadastrados:
+                print(c)
 
         else:
             filtro = {input(
@@ -262,7 +244,14 @@ def consultar(pessoa, tudo):
                 print(c)
 
 
+def vazio():
+    if mycolPessoa.estimated_document_count() == 0 and mycolLivros.estimated_document_count() == 0:
+        print("Não há registros cadastrados!")
+        return True
+
+
 while True:
+    time.sleep(1)
     option = input("\n1 - Inserir registro\n"
                    "2 - Alterar registro\n"
                    "3 - Excluir registro\n"
@@ -287,6 +276,8 @@ while True:
             continue
 
     elif option == "2":
+        if vazio():
+            continue
         table_update = input("\n1 - Alterar pessoa\n"
                              "2 - Alterar livro\n"
                              "Informe qualquer outro caractere para voltar ao menu\n"
@@ -300,6 +291,8 @@ while True:
             continue
 
     elif option == "3":
+        if vazio():
+            continue
         table_delete = input("\n1 - Excluir pessoa\n"
                              "2 - Excluir livro\n"
                              "Informe qualquer outro caractere para voltar ao menu\n"
@@ -339,13 +332,15 @@ while True:
             continue
 
     elif option == "4":
+        if vazio():
+            continue
         table_consulta = input("\n1 - Consultar pessoa\n"
                                "2 - Consultar livro\n"
                                "Informe qualquer outro caractere para voltar ao menu\n"
                                "Opção escolhida: ")
         if table_consulta == "1":
             opcao = input("\n1 - Consultar todas as pessoas\n"
-                          "2 - Consultar personalizada\n"
+                          "2 - Consulta personalizada\n"
                           "Informe qualquer outro caractere para voltar\n"
                           "Opção escolhida: ")
             if opcao == "1":
