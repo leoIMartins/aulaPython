@@ -1,20 +1,27 @@
 import pymongo
+from bson import ObjectId
 
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 mydb = myclient["dbatividade"]
 mycolFarmacia = mydb["farmacia"]
 
 
+def exibir_farmacias():
+    farmacias_cadastradas = mycolFarmacia.find()
+    for f in farmacias_cadastradas:
+        print(f)
+
+
 class Farmacia:
 
     def __init__(self):
-        self.descricao
-        self.qtd_funcionarios
-        self.qtd_medicamentos
-        self.endereco
-        self.telefone
-        self.cidade
-        self.estado
+        self.descricao = ""
+        self.qtd_funcionarios = ""
+        self.qtd_medicamentos = ""
+        self.endereco = ""
+        self.telefone = ""
+        self.cidade = ""
+        self.estado = ""
 
     def set_descricao(self, descricao):
         self.descricao = descricao
@@ -59,19 +66,41 @@ class Farmacia:
         return self.estado
 
     def cadastrar_farmacia(self):
-        descricao = input("Informe a descrição da farmácia: ")
-        qtd_funcionarios = input("Informe a quantidade de funcionários da farmácia: ")
-        qtd_medicamentos = input("Informe a quantidade de medicamentos da farmácia: ")
-        endereco = input("Informe o endereço da farmácia: ")
-        telefone = input("Informe o telefone da farmácia: ")
-        cidade = input("Informe a cidade da farmácia: ")
-        estado = input("Informe o estado da farmácia: ")
-        farmacia = {"descricao": descricao, "qtd_funcionarios": qtd_funcionarios, "qtd_medicamentos": qtd_medicamentos,
-                    "endereco": endereco, "telefone": telefone, "cidade": cidade, "estado": estado}
+        self.descricao = input("Informe a descrição da farmácia: ")
+        self.qtd_funcionarios = input("Informe a quantidade de funcionários da farmácia: ")
+        self.qtd_medicamentos = input("Informe a quantidade de medicamentos da farmácia: ")
+        self.endereco = input("Informe o endereço da farmácia: ")
+        self.telefone = input("Informe o telefone da farmácia: ")
+        self.cidade = input("Informe a cidade da farmácia: ")
+        self.estado = input("Informe o estado da farmácia: ")
+        farmacia = {"descricao": self.descricao, "qtd_funcionarios": self.qtd_funcionarios,
+                    "qtd_medicamentos": self.qtd_medicamentos, "endereco": self.endereco,
+                    "telefone": self.telefone, "cidade": self.cidade, "estado": self.estado}
         mycolFarmacia.insert_one(farmacia)
         return print("Farmácia incluída com sucesso!")
 
-    def consultar_farmacia(self, tudo):
+    @staticmethod
+    def alterar_farmacia():
+        exibir_farmacias()
+        farmacia_escolhida = {"_id": ObjectId(input("Informe o ID da farmácia a ser alterada: "))}
+        atributo_escollhido = input("\nInforme o atributo (exatamente como está abaixo) a ser alterado no livro:\n"
+                                    "descricao || qtd_funcionarios || qtd_medicamentos || endereco || telefone || "
+                                    "cidade || estado\n"
+                                    "Atributo escolhido: ")
+
+        novo_valor = {"$set": {atributo_escollhido: input("\nInforme o novo valor para o atributo: ")}}
+        mycolFarmacia.update_one(farmacia_escolhida, novo_valor)
+
+    @staticmethod
+    def excluir_farmacia(tudo):
+        if tudo:
+            mycolFarmacia.delete_many({})
+        else:
+            exibir_farmacias()
+            mycolFarmacia.delete_one({"_id": ObjectId(input("Informe o ID da farmácia a ser excluída: "))})
+
+    @staticmethod
+    def consultar_farmacia(tudo):
         if tudo:
             farmacias_cadastradas = mycolFarmacia.find()
 
@@ -82,7 +111,7 @@ class Farmacia:
             filtro = {input(
                 "\nInforme o atributo (exatamente como está abaixo) de pessoa a ser utilizado como"
                 " parâmetro na consulta:\n"
-                "descricao || qtd_funcionarios || qtd_medicamentos || endereço || telefone || cidade || estado\n"
+                "descricao || qtd_funcionarios || qtd_medicamentos || endereco || telefone || cidade || estado\n"
                 "Atributo escolhido: "): input("Informe o valor do atributo a ser pesquisado: ")}
 
             for f in mycolFarmacia.find(filtro):
