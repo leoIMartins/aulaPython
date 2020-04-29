@@ -1,12 +1,17 @@
 import pymongo
 # noinspection PyUnresolvedReferences
 from Farmacia import Farmacia
+from Medicamento import Medicamento
+from Cliente import Cliente
 
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 mydb = myclient["dbatividade"]
 mycolFarmacia = mydb["farmacia"]
 
 farmacia = Farmacia()
+medicamento = Medicamento()
+cliente = Cliente()
+
 
 while True:
     option = input("\n1 - Manter Farmácia\n"
@@ -53,7 +58,7 @@ while True:
         else:
             continue
 
-    '''if option == "2":
+    elif option == "2":
         option = input("\n1 - Cadastrar Medicamento\n"
                        "2 - Alterar Medicamento\n"
                        "3 - Excluir Medicamento\n"
@@ -66,13 +71,32 @@ while True:
         elif option == "2":
             medicamento.alterar_medicamento()
         elif option == "3":
-            medicamento.excluir_medicamento()
+            opcao = input("\n1 - Excluir medicamento específico\n"
+                          "2 - Excluir todos os medicamentos\n"
+                          "Informe qualquer outro caractere para voltar\n"
+                          "Opção escolhida: ")
+            if opcao == "1":
+                medicamento.excluir_medicamento(False)
+            elif opcao == "2":
+                opcao = input("Tem certeza que deseja excluir todos os medicamentos? (s/n): ")
+                if opcao == "s":
+                    medicamento.excluir_medicamento(True)
+                else:
+                    continue
+
         elif option == "4":
-            medicamento.consultar_medicamento()
+            opcao = input("\n1 - Consultar todos os medicamentos\n"
+                          "2 - Consulta personalizada\n"
+                          "Informe qualquer outro caractere para voltar\n"
+                          "Opção escolhida: ")
+            if opcao == "1":
+                medicamento.consultar_medicamento(True)
+            elif opcao == "2":
+                medicamento.consultar_medicamento(False)
         else:
             continue
 
-    if option == "3":
+    elif option == "3":
         option = input("\n1 - Cadastrar Cliente\n"
                        "2 - Alterar Cliente\n"
                        "3 - Excluir Cliente\n"
@@ -85,8 +109,33 @@ while True:
         elif option == "2":
             cliente.alterar_cliente()
         elif option == "3":
-            cliente.excluir_cliente()
+            opcao = input("\n1 - Excluir cliente específico\n"
+                          "2 - Excluir todos os clientes\n"
+                          "Informe qualquer outro caractere para voltar\n"
+                          "Opção escolhida: ")
+            if opcao == "1":
+                cliente.excluir_cliente(False)
+            elif opcao == "2":
+                opcao = input("Tem certeza que deseja excluir todos os clientes? (s/n): ")
+                if opcao == "s":
+                    cliente.excluir_cliente(True)
+                else:
+                    continue
+
         elif option == "4":
-            cliente.consultar_cliente()
+            opcao = input("\n1 - Consultar todos os clientes\n"
+                          "2 - Consulta personalizada\n"
+                          "Informe qualquer outro caractere para voltar\n"
+                          "Opção escolhida: ")
+            if opcao == "1":
+                cliente.consultar_cliente(True)
+            elif opcao == "2":
+                cliente.consultar_cliente(False)
         else:
-            continue'''
+            continue
+
+    elif option == "0":
+        break
+
+    else:
+        print("Informe uma opção válida!")

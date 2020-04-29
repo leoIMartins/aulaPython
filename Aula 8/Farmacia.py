@@ -83,21 +83,24 @@ class Farmacia:
     def alterar_farmacia():
         exibir_farmacias()
         farmacia_escolhida = {"_id": ObjectId(input("Informe o ID da farmácia a ser alterada: "))}
-        atributo_escollhido = input("\nInforme o atributo (exatamente como está abaixo) a ser alterado no livro:\n"
+        atributo_escollhido = input("\nInforme o atributo (exatamente como está abaixo) a ser alterado na farmácia:\n"
                                     "descricao || qtd_funcionarios || qtd_medicamentos || endereco || telefone || "
                                     "cidade || estado\n"
                                     "Atributo escolhido: ")
 
         novo_valor = {"$set": {atributo_escollhido: input("\nInforme o novo valor para o atributo: ")}}
         mycolFarmacia.update_one(farmacia_escolhida, novo_valor)
+        return print("Farmácia alterada com sucesso!")
 
     @staticmethod
     def excluir_farmacia(tudo):
         if tudo:
             mycolFarmacia.delete_many({})
+            return print("Farmácia(s) excluída(s) com sucesso!")
         else:
             exibir_farmacias()
             mycolFarmacia.delete_one({"_id": ObjectId(input("Informe o ID da farmácia a ser excluída: "))})
+            return print("Farmácia excluída com sucesso!")
 
     @staticmethod
     def consultar_farmacia(tudo):
@@ -109,7 +112,7 @@ class Farmacia:
 
         else:
             filtro = {input(
-                "\nInforme o atributo (exatamente como está abaixo) de pessoa a ser utilizado como"
+                "\nInforme o atributo (exatamente como está abaixo) de farmácia a ser utilizado como"
                 " parâmetro na consulta:\n"
                 "descricao || qtd_funcionarios || qtd_medicamentos || endereco || telefone || cidade || estado\n"
                 "Atributo escolhido: "): input("Informe o valor do atributo a ser pesquisado: ")}
