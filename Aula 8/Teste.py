@@ -1,8 +1,7 @@
 import pymongo
-# noinspection PyUnresolvedReferences
-from Farmacia import Farmacia
-from Medicamento import Medicamento
-from Cliente import Cliente
+from farmacia import Farmacia
+from medicamento import Medicamento
+from cliente import Cliente
 
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 mydb = myclient["dbatividade"]
