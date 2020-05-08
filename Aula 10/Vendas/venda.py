@@ -4,10 +4,14 @@ from bson import ObjectId
 from funcionario import Funcionario
 from produto import Produto
 from cliente import Cliente
+from datetime import date
 
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 mydb = myclient["dbvendas"]
 mycolVendas = mydb["vendas"]
+mycolProduto = mydb["produto"]
+mycolFuncionario = mydb["funcionario"]
+mycolCliente = mydb["cliente"]
 
 
 class Venda:
@@ -17,13 +21,27 @@ class Venda:
         self.funcionario = ""
         self.cliente = ""
 
-    def vender(self):
-        self.descricao = input("Informe a descricao da venda: ")
+    @staticmethod
+    def vender():
+        descricao = input("Informe a descricao da venda: ")
         Produto.exibir_produtos()
-        self.produto = input("Informe o ID do produto escolhido: ")
+        produto_escolhido = mycolProduto.find(
+            {"_id": ObjectId(input("Informe o ID do produto escolhido: "))})
         Funcionario.exibir_funcionarios()
-        self.funcionario = input("Informe o ID do funcionario escolhido: ")
+        funcionario_escolhido = mycolFuncionario.find(
+            {"_id": ObjectId(input("Informe o ID do funcionario escolhido: "))})
         Cliente.exibir_clientes()
-        self.cliente = input("Informe o ID do cliente escolhido: ")
+        cliente_escolhido = mycolCliente.find(
+            {"_id": ObjectId(input("Informe o ID do cliente escolhido: "))})
+        data = date.today().strftime("%d/%m/%Y")
 
+        venda = {"descricao": descricao, "produto": [produto_escolhido[0]], "funcionario": [funcionario_escolhido[0]],
+                 "cliente": [cliente_escolhido[0]], "data": data}
 
+        print(produto_escolhido[0])
+        print(funcionario_escolhido[0])
+        print(cliente_escolhido[0])
+        print(venda)
+
+        mycolVendas.insert_one(venda)
+        return print("Venda realizada com sucesso!")

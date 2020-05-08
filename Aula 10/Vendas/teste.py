@@ -2,6 +2,7 @@ import pymongo
 from funcionario import Funcionario
 from produto import Produto
 from cliente import Cliente
+from venda import Venda
 
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 mydb = myclient["dbvendas"]
@@ -9,12 +10,14 @@ mydb = myclient["dbvendas"]
 funcionario = Funcionario()
 produto = Produto()
 cliente = Cliente()
+venda = Venda()
 
 
 while True:
     option = input("\n1 - Manter Funcionário\n"
                    "2 - Manter Produto\n"
                    "3 - Manter Cliente\n"
+                   "4 - Vender\n"
                    "0 - Sair\n"
                    "Opção escolhida: ")
 
@@ -131,6 +134,9 @@ while True:
                 cliente.consultar_cliente(False)
         else:
             continue
+
+    elif option == "4":
+        venda.vender()
 
     elif option == "0":
         break
