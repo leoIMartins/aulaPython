@@ -49,7 +49,9 @@ class Produto:
         self.nome = input("Informe o nome do produto: ")
         self.preco = input("Informe o preço do produto: ")
         self.data_entrada = date.today().strftime("%d/%m/%Y")
-        produto = {"nome": self.nome, "preco": self.preco, "data_entrada": self.data_entrada}
+        self.data_saida = ""
+        produto = {"nome": self.nome, "preco": self.preco, "data_entrada": self.data_entrada,
+                   "data_saida": self.data_saida}
         mycolProduto.insert_one(produto)
         return print("Produto incluído com sucesso!")
 
@@ -94,7 +96,10 @@ class Produto:
                 print(c)
 
     @staticmethod
-    def exibir_produtos():
-        produtos_cadastradas = mycolProduto.find()
+    def exibir_produtos(venda):
+        if venda:
+            produtos_cadastradas = mycolProduto.find({"data_saida": ""}, {"data_saida": 0})
+        else:
+            produtos_cadastradas = mycolProduto.find()
         for c in produtos_cadastradas:
             print(c)

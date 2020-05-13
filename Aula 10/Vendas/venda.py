@@ -24,7 +24,7 @@ class Venda:
     @staticmethod
     def vender():
         descricao = input("Informe a descricao da venda: ")
-        Produto.exibir_produtos()
+        Produto.exibir_produtos(True)
         produto_escolhido = mycolProduto.find(
             {"_id": ObjectId(input("Informe o ID do produto escolhido: "))})
         Funcionario.exibir_funcionarios()
@@ -35,13 +35,11 @@ class Venda:
             {"_id": ObjectId(input("Informe o ID do cliente escolhido: "))})
         data = date.today().strftime("%d/%m/%Y")
 
+        data_saida_produto = {"$set": {"data_saida": date.today().strftime("%d/%m/%Y")}}
+        mycolProduto.update_one(produto_escolhido[0], data_saida_produto)
+
         venda = {"descricao": descricao, "produto": [produto_escolhido[0]], "funcionario": [funcionario_escolhido[0]],
                  "cliente": [cliente_escolhido[0]], "data": data}
-
-        print(produto_escolhido[0])
-        print(funcionario_escolhido[0])
-        print(cliente_escolhido[0])
-        print(venda)
-
         mycolVendas.insert_one(venda)
+
         return print("Venda realizada com sucesso!")
