@@ -37,9 +37,9 @@ class Venda:
 
         data_saida_produto = {"$set": {"data_saida": date.today().strftime("%d/%m/%Y")}}
         mycolProduto.update_one(produto_escolhido[0], data_saida_produto)
-
-        venda = {"descricao": descricao, "produto": [produto_escolhido[0]], "funcionario": [funcionario_escolhido[0]],
-                 "cliente": [cliente_escolhido[0]], "data": data}
+        cli = cliente_escolhido[0]
+        venda = {"descricao": descricao, "produto": [produto_escolhido[0]], "funcionario": funcionario_escolhido[0],
+                 "cliente": cli, "data": data}
         mycolVendas.insert_one(venda)
 
         return print("Venda realizada com sucesso!")
