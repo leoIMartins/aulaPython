@@ -7,8 +7,8 @@ mycolEstadio = mydb["estadio"]
 
 
 def exibir_estadios():
-    estadios_cadastradas = mycolEstadio.find()
-    for c in estadios_cadastradas:
+    estadios_cadastrados = mycolEstadio.find()
+    for c in estadios_cadastrados:
         print(c)
 
 

@@ -3,6 +3,7 @@ from clube import Clube
 from estadio import Estadio
 from torcedor import Torcedor
 from ingresso import Ingresso
+from jogo import Jogo
 
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 mydb = myclient["dbfutebol"]
@@ -11,6 +12,7 @@ clube = Clube()
 estadio = Estadio()
 torcedor = Torcedor()
 ingresso = Ingresso()
+jogo = Jogo()
 
 
 while True:
@@ -18,7 +20,7 @@ while True:
                    "2 - Manter Estádio\n"
                    "3 - Manter Torcedor\n"
                    "4 - Manter Ingresso\n"
-                   "5 - Gerar Resultado do Jogo\n"
+                   "5 - Gerar Jogo\n"
                    "0 - Sair\n"
                    "Opção escolhida: ")
 
@@ -156,7 +158,7 @@ while True:
             ingresso.consultar_ingresso(True)
 
     elif option == "5":
-        pass
+        jogo.gerar_jogo()
 
     elif option == "0":
         break

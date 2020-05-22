@@ -7,8 +7,8 @@ mycolTorcedor = mydb["torcedor"]
 
 
 def exibir_torcedores():
-    torcedores_cadastradas = mycolTorcedor.find()
-    for c in torcedores_cadastradas:
+    torcedores_cadastrados = mycolTorcedor.find()
+    for c in torcedores_cadastrados:
         print(c)
 
 

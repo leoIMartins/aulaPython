@@ -7,8 +7,8 @@ mycolClube = mydb["clube"]
 
 
 def exibir_clubes():
-    clubes_cadastradas = mycolClube.find()
-    for c in clubes_cadastradas:
+    clubes_cadastrados = mycolClube.find()
+    for c in clubes_cadastrados:
         print(c)
 
 
