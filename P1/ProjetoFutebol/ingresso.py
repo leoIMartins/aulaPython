@@ -5,6 +5,7 @@ from jogo import Jogo
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 mydb = myclient["dbfutebol"]
 mycolIngresso = mydb["ingresso"]
+mycolJogo = mydb["jogo"]
 
 jogo = Jogo()
 
@@ -13,6 +14,19 @@ def exibir_ingressos():
     ingressos_cadastrados = mycolIngresso.find()
     for c in ingressos_cadastrados:
         print(c)
+
+
+def validar_cadastros_realizados():
+    quantidade_jogos = 0
+    jogos_cadastrados = mycolJogo.find()
+    for j in jogos_cadastrados:
+        quantidade_jogos += 1
+    print("Jogos cadastrados: ", str(quantidade_jogos))
+    if quantidade_jogos < 1:
+        print("É necessário cadastrar no mínimo 1 jogo para prosseguir!")
+        return False
+    print("Cadastros validados com sucesso")
+    return True
 
 
 class Ingresso:
@@ -41,20 +55,22 @@ class Ingresso:
         return self.jogo
 
     def cadastrar_ingresso(self):
-        quantidade = 0
-        self.preco = input("Informe o preço do ingresso: ")
-        self.setor = input("Informe o setor da arquibancada: ")
-        Jogo.exibir_jogos()
-        self.jogo = {"_id": ObjectId(input("Informe o ID do jogo: "))}
-        while quantidade < 1:
-            quantidade = int(input("Informe a quantidade a ser disponibilizada: "))
-            if quantidade < 1:
-                print("Informe uma quantidade maior que 0")
-        for q in range(quantidade):
-            ingresso = {"preco": self.preco, "setor": self.setor, "jogo": self.jogo}
-            mycolIngresso.insert_one(ingresso)
+        if validar_cadastros_realizados():
+            quantidade = 0
+            self.preco = input("Informe o preço do ingresso: ")
+            self.setor = input("Informe o setor da arquibancada: ")
+            Jogo.exibir_jogos()
+            self.jogo = mycolJogo.find(
+                {"_id": ObjectId(input("Informe o ID do jogo: "))})
+            while quantidade < 1:
+                quantidade = int(input("Informe a quantidade a ser disponibilizada: "))
+                if quantidade < 1:
+                    print("Informe uma quantidade maior que 0")
+            for q in range(quantidade):
+                ingresso = {"preco": self.preco, "setor": self.setor, "jogo": self.jogo[0]}
+                mycolIngresso.insert_one(ingresso)
 
-        return print("Ingresso(s) incluído(s) com sucesso!")
+            return print("Ingresso(s) incluído(s) com sucesso!")
 
     @staticmethod
     def excluir_ingresso(tudo):

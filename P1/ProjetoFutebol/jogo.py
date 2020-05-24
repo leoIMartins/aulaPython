@@ -3,8 +3,6 @@ from bson import ObjectId
 from clube import Clube
 from estadio import Estadio
 from torcedor import Torcedor
-from ingresso import Ingresso
-from jogo import Jogo
 
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 mydb = myclient["dbfutebol"]
@@ -17,8 +15,6 @@ mycolIngresso = mydb["ingresso"]
 clube = Clube()
 estadio = Estadio()
 torcedor = Torcedor()
-ingresso = Ingresso()
-jogo = Jogo()
 
 
 def validar_cadastros_realizados():
@@ -82,20 +78,23 @@ class Jogo:
             self.descricao = input("Informe a descrição da partida: ")
 
             clube.exibir_clubes()
-            self.clube_a = mycolClube.find(
-                {"_id": ObjectId(input("Informe o ID do clube A: "))})
-
-            clube.exibir_clubes()
-            self.clube_b = mycolClube.find(
-                {"_id": ObjectId(input("Informe o ID do clube B: "))})
+            id_clube_a = ObjectId(input("Informe o ID do clube A: "))
+            self.clube_a = mycolClube.find({"_id": id_clube_a})
+            id_clube_b = id_clube_a
+            while id_clube_b == id_clube_a:
+                clube.exibir_clubes()
+                id_clube_b = ObjectId(input("Informe o ID do clube B: "))
+                self.clube_b = mycolClube.find({"_id": id_clube_b})
+                if id_clube_b == id_clube_a:
+                    print("O ID dos clubes A e B devem ser diferentes!")
 
             estadio.exibir_estadios()
             self.estadio = mycolEstadio.find(
                 {"_id": ObjectId(input("Informe o ID do estádio: "))})
-            jogo = {"descricao": self.descricao, "clube_a": [self.clube_a[0]],
-                    "clube_b": [self.clube_b[0]], "estadio": [self.estadio[0]]}
+            jogo = {"descricao": self.descricao, "clube_a": self.clube_a[0],
+                    "clube_b": self.clube_b[0], "estadio": self.estadio[0]}
             mycolJogo.insert_one(jogo)
-            return print("Torcedor incluído com sucesso!")
+            return print("Jogo gerado com sucesso!")
 
     @staticmethod
     def exibir_jogos():
