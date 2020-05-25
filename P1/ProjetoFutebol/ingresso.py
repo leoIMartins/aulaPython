@@ -67,7 +67,7 @@ class Ingresso:
                 if quantidade < 1:
                     print("Informe uma quantidade maior que 0")
             for q in range(quantidade):
-                ingresso = {"preco": self.preco, "setor": self.setor, "jogo": self.jogo[0]}
+                ingresso = {"preco": self.preco, "setor": self.setor, "jogo": self.jogo[0], "vendido": "Nao"}
                 mycolIngresso.insert_one(ingresso)
 
             return print("Ingresso(s) incluído(s) com sucesso!")
@@ -78,5 +78,10 @@ class Ingresso:
         return print("Ingresso(s) excluído(s) com sucesso!")
 
     @staticmethod
-    def consultar_ingresso(tudo):
-        exibir_ingressos()
+    def consultar_ingresso(disponivel):
+        if disponivel:
+            ingressos_cadastrados = mycolIngresso.find({"vendido": "Nao"}, {"vendido": 0})
+        else:
+            ingressos_cadastrados = mycolIngresso.find()
+        for c in ingressos_cadastrados:
+            print(c)

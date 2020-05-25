@@ -9,6 +9,8 @@ mycolCompra = mydb["compra"]
 mycolIngresso = mydb["ingresso"]
 mycolTorcedor = mydb["torcedor"]
 
+torcedor = Torcedor()
+ingresso = Ingresso()
 
 def exibir_compras():
     compras_cadastradas = mycolCompra.find()
@@ -20,7 +22,7 @@ def validar_cadastros_realizados():
     i = 0
     lista = []
     verificacoes = ["ingressos", "torcedores"]
-    ingressos_cadastrados = mycolIngresso.find()
+    ingressos_cadastrados = mycolIngresso.find({"vendido": "Nao"})
     torcedores_cadastrados = mycolTorcedor.find()
     lista.append(ingressos_cadastrados)
     lista.append(torcedores_cadastrados)
@@ -60,34 +62,29 @@ class Compra:
 
     def comprar(self):
         if validar_cadastros_realizados():
-            '''quantidade = 0
-            self.torcedor = input("Informe o preço do compra: ")
-            self.ingresso = input("Informe o ingresso da arquibancada: ")
-            while quantidade < 1:
-                quantidade = int(input("Informe a quantidade a ser disponibilizada: "))
-                if quantidade < 1:
-                    print("Informe uma quantidade maior que 0")
-            for q in range(quantidade):
-                compra = {"torcedor": self.torcedor, "ingresso": self.ingresso}
-                mycolCompra.insert_one(compra)'''
-            # PAREI AQUIIII!!!!!
+            torcedor.exibir_torcedores()
+            self.torcedor = mycolTorcedor.find({"_id": ObjectId(input("Informe o ID do torcedor: "))})
+            ingresso.consultar_ingresso(True)
+            self.ingresso = mycolIngresso.find({"_id": ObjectId(input("Informe o ID do ingresso: "))})
 
+            status_compra_ingresso = {"$set": {"vendido": "Sim"}}
+            mycolIngresso.update_one(self.ingresso[0], status_compra_ingresso)
+
+            compra = {"torcedor": self.torcedor[0], "ingresso": self.ingresso[0]}
+            mycolCompra.insert_one(compra)
             return print("Compra efetuada com sucesso!")
 
     @staticmethod
     def consultar_compra(tudo):
         if tudo:
             compras_cadastradas = mycolCompra.find()
-
             for c in compras_cadastradas:
                 print(c)
-
         else:
             filtro = {input(
                 "\nInforme o atributo (exatamente como está abaixo) da compra a ser utilizado como"
                 " parâmetro na consulta:\n"
                 "torcedor || ingresso\n"
                 "Atributo escolhido: "): input("Informe o valor do atributo a ser pesquisado: ")}
-
             for c in mycolCompra.find(filtro):
                 print(c)

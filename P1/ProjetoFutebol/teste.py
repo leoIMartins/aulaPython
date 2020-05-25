@@ -18,12 +18,12 @@ compra = Compra()
 
 
 while True:
-    option = input("\n1 - Manter Clube\n"
-                   "2 - Manter Estádio\n"
-                   "3 - Manter Torcedor\n"
-                   "4 - Manter Ingresso\n"
+    option = input("\n1 - Clube\n"
+                   "2 - Estádio\n"
+                   "3 - Torcedor\n"
+                   "4 - Ingresso\n"
                    "5 - Cadastrar Jogo\n"
-                   "6 - Manter Compra\n"
+                   "6 - Compra\n"
                    "0 - Sair\n"
                    "Opção escolhida: ")
 
@@ -158,7 +158,7 @@ while True:
                 continue
 
         elif option == "3":
-            ingresso.consultar_ingresso(True)
+            ingresso.consultar_ingresso(False)
 
     elif option == "5":
         jogo.gerar_jogo()
