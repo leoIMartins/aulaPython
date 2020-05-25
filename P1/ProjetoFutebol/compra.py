@@ -64,15 +64,29 @@ class Compra:
         if validar_cadastros_realizados():
             torcedor.exibir_torcedores()
             self.torcedor = mycolTorcedor.find({"_id": ObjectId(input("Informe o ID do torcedor: "))})
+            nome_torcedor = dict(self.torcedor[0]).get("nome")
             ingresso.consultar_ingresso(True)
-            self.ingresso = mycolIngresso.find({"_id": ObjectId(input("Informe o ID do ingresso: "))})
+            id_ingresso = ObjectId(input("Informe o ID do ingresso: "))
+            self.ingresso = mycolIngresso.find({"_id": id_ingresso})
 
             status_compra_ingresso = {"$set": {"vendido": "Sim"}}
             mycolIngresso.update_one(self.ingresso[0], status_compra_ingresso)
 
             compra = {"torcedor": self.torcedor[0], "ingresso": self.ingresso[0]}
             mycolCompra.insert_one(compra)
-            return print("Compra efetuada com sucesso!")
+            print("Compra efetuada com sucesso!")
+
+            ingresso_jogo = open('C:\\Python\\aulaPython\\P1\\ProjetoFutebol\\Ingresso.txt', 'w')
+            jogo = dict(self.ingresso[0]).get("jogo")
+            clube_a = dict(jogo).get("clube_a")
+            nome_clube_a = dict(clube_a).get("nome")
+            clube_b = dict(jogo).get("clube_b")
+            nome_clube_b = dict(clube_b).get("nome")
+            ingresso_jogo.write("Código do ingresso: %s\n" % id_ingresso)
+            ingresso_jogo.write("%s X %s\n" % (nome_clube_a, nome_clube_b))
+            ingresso_jogo.write("Torcedor: %s\n" % nome_torcedor)
+            print("Ingresso gerado com sucesso")
+            ingresso_jogo.close()
 
     @staticmethod
     def consultar_compra(tudo):
