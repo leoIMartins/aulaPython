@@ -8,8 +8,13 @@ mycolTorcedor = mydb["torcedor"]
 
 def exibir_torcedores():
     torcedores_cadastrados = mycolTorcedor.find()
-    for c in torcedores_cadastrados:
-        print(c)
+    for x in torcedores_cadastrados:
+        print("ID: %s" % x.get("_id"))
+        print(" - CPF: %s" % x.get("cpf"))
+        print(" - Nome: %s" % x.get("nome"))
+        print(" - Idade: %s" % x.get("idade"))
+        print(" - Clube do torcedor: " % x.get("clube"))
+        print("----------------------------------------------------------------------------------------------")
 
 
 class Torcedor:
@@ -78,10 +83,7 @@ class Torcedor:
     @staticmethod
     def consultar_torcedor(tudo):
         if tudo:
-            torcedores_cadastrados = mycolTorcedor.find()
-
-            for c in torcedores_cadastrados:
-                print(c)
+            filtro = {}
 
         else:
             filtro = {input(
@@ -90,11 +92,11 @@ class Torcedor:
                 "cpf || nome || idade || clube\n"
                 "Atributo escolhido: "): input("Informe o valor do atributo a ser pesquisado: ")}
 
-            for c in mycolTorcedor.find(filtro):
-                print(c)
-
-    @staticmethod
-    def exibir_torcedores():
-        torcedores_cadastrados = mycolTorcedor.find()
-        for c in torcedores_cadastrados:
-            print(c)
+        torcedores_cadastrados = mycolTorcedor.find(filtro)
+        for x in torcedores_cadastrados:
+            print("ID: %s" % x.get("_id"))
+            print(" - CPF: %s" % x.get("cpf"))
+            print(" - Nome: %s" % x.get("nome"))
+            print(" - Idade: %s" % x.get("idade"))
+            print(" - Clube do torcedor: %s" % x.get("clube"))
+            print("----------------------------------------------------------------------------------------------")

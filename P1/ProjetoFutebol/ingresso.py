@@ -84,4 +84,14 @@ class Ingresso:
         else:
             ingressos_cadastrados = mycolIngresso.find()
         for x in ingressos_cadastrados:
-            print("ID do ingresso: %s" % x.get("_id"))
+            jogo_dados = dict(x).get("jogo")
+            clube_a = dict(jogo_dados).get("clube_a")
+            clube_b = dict(jogo_dados).get("clube_b")
+            estadio = dict(jogo_dados).get("estadio")
+            print("ID: %s" % x.get("_id"))
+            print(" - Preço: R$%s" % x.get("preco"))
+            print(" - Setor: %s" % x.get("setor"))
+            print(" - Descrição do jogo: %s" % jogo_dados.get("descricao"))
+            print(" - %s X %s" % (clube_a.get("nome"), clube_b.get("nome")))
+            print(" - Estádio: %s" % estadio.get("nome"))
+            print("----------------------------------------------------------------------------------------------")

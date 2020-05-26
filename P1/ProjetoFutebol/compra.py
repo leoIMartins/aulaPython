@@ -63,7 +63,7 @@ class Compra:
 
     def comprar(self):
         if validar_cadastros_realizados():
-            torcedor.exibir_torcedores()
+            torcedor.consultar_torcedor(True)
             self.torcedor = mycolTorcedor.find({"_id": ObjectId(input("Informe o ID do torcedor: "))})
             ingresso.consultar_ingresso(True)
             id_ingresso = ObjectId(input("Informe o ID do ingresso: "))
