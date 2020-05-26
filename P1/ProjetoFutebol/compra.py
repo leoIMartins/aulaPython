@@ -12,6 +12,7 @@ mycolTorcedor = mydb["torcedor"]
 torcedor = Torcedor()
 ingresso = Ingresso()
 
+
 def exibir_compras():
     compras_cadastradas = mycolCompra.find()
     for c in compras_cadastradas:
@@ -64,7 +65,6 @@ class Compra:
         if validar_cadastros_realizados():
             torcedor.exibir_torcedores()
             self.torcedor = mycolTorcedor.find({"_id": ObjectId(input("Informe o ID do torcedor: "))})
-            nome_torcedor = dict(self.torcedor[0]).get("nome")
             ingresso.consultar_ingresso(True)
             id_ingresso = ObjectId(input("Informe o ID do ingresso: "))
             self.ingresso = mycolIngresso.find({"_id": id_ingresso})
@@ -77,14 +77,39 @@ class Compra:
             print("Compra efetuada com sucesso!")
 
             ingresso_jogo = open('C:\\Python\\aulaPython\\P1\\ProjetoFutebol\\Ingresso.txt', 'w')
+
             jogo = dict(self.ingresso[0]).get("jogo")
             clube_a = dict(jogo).get("clube_a")
             nome_clube_a = dict(clube_a).get("nome")
             clube_b = dict(jogo).get("clube_b")
             nome_clube_b = dict(clube_b).get("nome")
-            ingresso_jogo.write("Código do ingresso: %s\n" % id_ingresso)
+            estadio = dict(jogo).get("estadio")
+            nome_estadio = dict(estadio).get("nome")
+            cidade_estadio = dict(estadio).get("cidade")
+            descricao_jogo = dict(jogo).get("descricao")
+            pais_estadio = dict(estadio).get("pais")
+            torcedor_dados = dict(self.torcedor[0])
+            nome_torcedor = dict(torcedor_dados).get("nome")
+            cpf_torcedor = dict(torcedor_dados).get("cpf")
+            idade_torcedor = dict(torcedor_dados).get("idade")
+            setor_ingresso = dict(self.ingresso[0]).get("setor")
+            preco_ingresso = dict(self.ingresso[0]).get("preco")
+
+            ingresso_jogo.write("--------------------- INGRESSO ---------------------\n")
+            ingresso_jogo.write("****************** DADOS DO JOGO ******************\n")
             ingresso_jogo.write("%s X %s\n" % (nome_clube_a, nome_clube_b))
+            ingresso_jogo.write("Estádio: %s\n" % nome_estadio)
+            ingresso_jogo.write("Cidade: %s - País: %s\n" % (cidade_estadio, pais_estadio))
+            ingresso_jogo.write("Descrição do jogo: %s\n" % descricao_jogo)
+            ingresso_jogo.write("**************** DADOS DO COMPRADOR ****************\n")
             ingresso_jogo.write("Torcedor: %s\n" % nome_torcedor)
+            ingresso_jogo.write("CPF: %s\n" % cpf_torcedor)
+            ingresso_jogo.write("Idade: %s\n" % idade_torcedor)
+            ingresso_jogo.write("**************** DADOS DO INGRESSO *****************\n")
+            ingresso_jogo.write("Código: %s\n" % id_ingresso)
+            ingresso_jogo.write("Setor da arquibancada: %s\n" % setor_ingresso)
+            ingresso_jogo.write("Preço total: R$%s" % preco_ingresso)
+
             print("Ingresso gerado com sucesso")
             ingresso_jogo.close()
 

@@ -1,3 +1,14 @@
-Código do ingresso: 5ecc1fee3d13953238826c7a
+--------------------- INGRESSO ---------------------
+****************** DADOS DO JOGO ******************
 spfc X palmeiras
-Torcedor: laura
+Estádio: morumbi
+Cidade: são paulo - País: brasil
+Descrição do jogo: spfc vs palmeiras
+**************** DADOS DO COMPRADOR ****************
+Torcedor: fabio
+CPF: 321
+Idade: 16
+**************** DADOS DO INGRESSO *****************
+Código: 5ecc6fb04b347964479be912
+Setor da arquibancada: vermelho
+Preço total: R$5

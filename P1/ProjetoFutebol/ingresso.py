@@ -83,5 +83,5 @@ class Ingresso:
             ingressos_cadastrados = mycolIngresso.find({"vendido": "Nao"}, {"vendido": 0})
         else:
             ingressos_cadastrados = mycolIngresso.find()
-        for c in ingressos_cadastrados:
-            print(c)
+        for x in ingressos_cadastrados:
+            print("ID do ingresso: %s" % x.get("_id"))
