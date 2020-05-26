@@ -7,9 +7,13 @@ mycolClube = mydb["clube"]
 
 
 def exibir_clubes():
-    clubes_cadastrados = mycolClube.find()
-    for c in clubes_cadastrados:
-        print(c)
+    print("\n")
+    for x in mycolClube.find():
+        print("ID: %s" % x.get("_id"))
+        print(" - Nome: %s" % x.get("nome"))
+        print(" - Técnico: %s" % x.get("tecnico"))
+        print(" - Número de títulos: " % x.get("numero_titulos"))
+        print("----------------------------------------------------------------------------------------------")
 
 
 class Clube:
@@ -69,24 +73,19 @@ class Clube:
 
     @staticmethod
     def consultar_clube(tudo):
+        print("\n")
         if tudo:
-            clubes_cadastrados = mycolClube.find()
-
-            for c in clubes_cadastrados:
-                print(c)
-
+            filtro = {}
         else:
             filtro = {input(
-                "\nInforme o atributo (exatamente como está abaixo) do clube a ser utilizado como"
+                "Informe o atributo (exatamente como está abaixo) do clube a ser utilizado como"
                 " parâmetro na consulta:\n"
                 "nome || tecnico || numero_titulos\n"
                 "Atributo escolhido: "): input("Informe o valor do atributo a ser pesquisado: ")}
 
-            for c in mycolClube.find(filtro):
-                print(c)
-
-    @staticmethod
-    def exibir_clubes():
-        clubes_cadastrados = mycolClube.find()
-        for c in clubes_cadastrados:
-            print(c)
+        for x in mycolClube.find(filtro):
+            print("ID: %s" % x.get("_id"))
+            print(" - Nome: %s" % x.get("nome"))
+            print(" - Técnico: %s" % x.get("tecnico"))
+            print(" - Número de títulos: %s" % x.get("numero_titulos"))
+            print("----------------------------------------------------------------------------------------------")

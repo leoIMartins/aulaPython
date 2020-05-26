@@ -77,18 +77,18 @@ class Jogo:
         if validar_cadastros_realizados():
             self.descricao = input("Informe a descrição da partida: ")
 
-            clube.exibir_clubes()
+            clube.consultar_clube(True)
             id_clube_a = ObjectId(input("Informe o ID do clube A: "))
             self.clube_a = mycolClube.find({"_id": id_clube_a})
             id_clube_b = id_clube_a
             while id_clube_b == id_clube_a:
-                clube.exibir_clubes()
+                clube.consultar_clube(True)
                 id_clube_b = ObjectId(input("Informe o ID do clube B: "))
                 self.clube_b = mycolClube.find({"_id": id_clube_b})
                 if id_clube_b == id_clube_a:
                     print("O ID dos clubes A e B devem ser diferentes!")
 
-            estadio.exibir_estadios()
+            estadio.consultar_estadio(True)
             self.estadio = mycolEstadio.find(
                 {"_id": ObjectId(input("Informe o ID do estádio: "))})
             jogo = {"descricao": self.descricao, "clube_a": self.clube_a[0],
@@ -98,15 +98,13 @@ class Jogo:
 
     @staticmethod
     def exibir_jogos():
-        jogos_cadastrados = mycolJogo.find()
-        for c in jogos_cadastrados:
-            print(c)
-
-
-'''arq = open('C:\\Users\\lmartins8\\projetos\\aulapython01\\Aula 3 - Exercícios\\carros.txt', 'w')
-descricao = input("Informe a descrição da partida de futebol: ")
-arq.write(descricao)
-
-
-arq.close()
-print("Jogo gerado com sucesso! O arquivo .txt está disponível para leitura.")'''
+        print("\n")
+        for x in mycolJogo.find():
+            clube_a = dict(x).get("clube_a")
+            clube_b = dict(x).get("clube_b")
+            estadio_dados = dict(x).get("estadio")
+            print("ID: %s" % x.get("_id"))
+            print(" - Descrição do jogo: %s" % x.get("descricao"))
+            print(" - %s X %s" % (clube_a.get("nome"), clube_b.get("nome")))
+            print(" - Estádio: %s" % estadio_dados.get("nome"))
+            print("----------------------------------------------------------------------------------------------")

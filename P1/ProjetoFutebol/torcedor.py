@@ -7,8 +7,8 @@ mycolTorcedor = mydb["torcedor"]
 
 
 def exibir_torcedores():
-    torcedores_cadastrados = mycolTorcedor.find()
-    for x in torcedores_cadastrados:
+    print("\n")
+    for x in mycolTorcedor.find():
         print("ID: %s" % x.get("_id"))
         print(" - CPF: %s" % x.get("cpf"))
         print(" - Nome: %s" % x.get("nome"))
@@ -82,18 +82,17 @@ class Torcedor:
 
     @staticmethod
     def consultar_torcedor(tudo):
+        print("\n")
         if tudo:
             filtro = {}
-
         else:
             filtro = {input(
-                "\nInforme o atributo (exatamente como está abaixo) do torcedor a ser utilizado como"
+                "Informe o atributo (exatamente como está abaixo) do torcedor a ser utilizado como"
                 " parâmetro na consulta:\n"
                 "cpf || nome || idade || clube\n"
                 "Atributo escolhido: "): input("Informe o valor do atributo a ser pesquisado: ")}
 
-        torcedores_cadastrados = mycolTorcedor.find(filtro)
-        for x in torcedores_cadastrados:
+        for x in mycolTorcedor.find(filtro):
             print("ID: %s" % x.get("_id"))
             print(" - CPF: %s" % x.get("cpf"))
             print(" - Nome: %s" % x.get("nome"))

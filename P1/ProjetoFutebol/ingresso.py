@@ -11,9 +11,20 @@ jogo = Jogo()
 
 
 def exibir_ingressos():
-    ingressos_cadastrados = mycolIngresso.find()
-    for c in ingressos_cadastrados:
-        print(c)
+    print("\n")
+    for x in mycolIngresso.find():
+        jogo_dados = dict(x).get("jogo")
+        clube_a = dict(jogo_dados).get("clube_a")
+        clube_b = dict(jogo_dados).get("clube_b")
+        estadio = dict(jogo_dados).get("estadio")
+        print("ID: %s" % x.get("_id"))
+        print(" - Preço: R$%s" % x.get("preco"))
+        print(" - Setor: %s" % x.get("setor"))
+        print(" - Descrição do jogo: %s" % jogo_dados.get("descricao"))
+        print(" - %s X %s" % (clube_a.get("nome"), clube_b.get("nome")))
+        print(" - Estádio: %s" % estadio.get("nome"))
+        print(" - Disponível: %s" % x.get("vendido"))
+        print("----------------------------------------------------------------------------------------------")
 
 
 def validar_cadastros_realizados():
@@ -79,6 +90,7 @@ class Ingresso:
 
     @staticmethod
     def consultar_ingresso(disponivel):
+        print("\n")
         if disponivel:
             ingressos_cadastrados = mycolIngresso.find({"vendido": "Nao"}, {"vendido": 0})
         else:
@@ -94,4 +106,6 @@ class Ingresso:
             print(" - Descrição do jogo: %s" % jogo_dados.get("descricao"))
             print(" - %s X %s" % (clube_a.get("nome"), clube_b.get("nome")))
             print(" - Estádio: %s" % estadio.get("nome"))
+            if not disponivel:
+                print(" - Disponível: %s" % x.get("vendido"))
             print("----------------------------------------------------------------------------------------------")

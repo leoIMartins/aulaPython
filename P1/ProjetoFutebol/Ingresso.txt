@@ -1,14 +1,14 @@
 --------------------- INGRESSO ---------------------
 ****************** DADOS DO JOGO ******************
-spfc X palmeiras
-Estádio: morumbi
-Cidade: são paulo - País: brasil
-Descrição do jogo: spfc vs palmeiras
+palmeiras X corinthans
+Estádio: Old Trafford
+Cidade: Manchester - País: Inglaterra
+Descrição do jogo: Brasileirão Série A
 **************** DADOS DO COMPRADOR ****************
-Torcedor: fabio
-CPF: 321
-Idade: 16
+Torcedor: leo
+CPF: 123
+Idade: 22
 **************** DADOS DO INGRESSO *****************
-Código: 5ecc6fb04b347964479be915
-Setor da arquibancada: vermelho
-Preço total: R$5
+Código: 5ecd6fd6d111d1b65d54b3be
+Setor da arquibancada: verde
+Preço total: R$20

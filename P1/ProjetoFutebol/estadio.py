@@ -7,9 +7,14 @@ mycolEstadio = mydb["estadio"]
 
 
 def exibir_estadios():
-    estadios_cadastrados = mycolEstadio.find()
-    for c in estadios_cadastrados:
-        print(c)
+    print("\n")
+    for x in mycolEstadio.find():
+        print("ID: %s" % x.get("_id"))
+        print(" - Nome: %s" % x.get("nome"))
+        print(" - País: %s" % x.get("pais"))
+        print(" - Cidade: %s" % x.get("cidade"))
+        print(" - Capacidade: %s" % x.get("capacidade"))
+        print("----------------------------------------------------------------------------------------------")
 
 
 class Estadio:
@@ -77,24 +82,20 @@ class Estadio:
 
     @staticmethod
     def consultar_estadio(tudo):
+        print("\n")
         if tudo:
-            estadios_cadastrados = mycolEstadio.find()
-
-            for c in estadios_cadastrados:
-                print(c)
-
+            filtro = {}
         else:
             filtro = {input(
-                "\nInforme o atributo (exatamente como está abaixo) do estadio a ser utilizado como"
+                "Informe o atributo (exatamente como está abaixo) do estadio a ser utilizado como"
                 " parâmetro na consulta:\n"
                 "nome || pais || cidade || capacidade\n"
                 "Atributo escolhido: "): input("Informe o valor do atributo a ser pesquisado: ")}
 
-            for c in mycolEstadio.find(filtro):
-                print(c)
-
-    @staticmethod
-    def exibir_estadios():
-        estadios_cadastrados = mycolEstadio.find()
-        for c in estadios_cadastrados:
-            print(c)
+        for x in mycolEstadio.find(filtro):
+            print("ID: %s" % x.get("_id"))
+            print(" - Nome: %s" % x.get("nome"))
+            print(" - País: %s" % x.get("pais"))
+            print(" - Cidade: %s" % x.get("cidade"))
+            print(" - Capacidade: %s" % x.get("capacidade"))
+            print("----------------------------------------------------------------------------------------------")
