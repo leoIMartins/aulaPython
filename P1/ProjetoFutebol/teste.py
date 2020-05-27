@@ -22,7 +22,7 @@ while True:
                    "2 - Estádio\n"
                    "3 - Torcedor\n"
                    "4 - Ingresso\n"
-                   "5 - Cadastrar Jogo\n"
+                   "5 - Jogo\n"
                    "6 - Compra\n"
                    "0 - Sair\n"
                    "Opção escolhida: ")
@@ -153,7 +153,7 @@ while True:
         elif option == "2":
             opcao = input("Tem certeza que deseja excluir todos os ingressos? (s/n): ")
             if opcao == "s":
-                ingresso.excluir_ingresso(True)
+                ingresso.excluir_ingressos()
             else:
                 continue
 
@@ -161,27 +161,25 @@ while True:
             ingresso.consultar_ingresso(False)
 
     elif option == "5":
-        jogo.gerar_jogo()
+        option = input("\n1 - Cadastrar Jogo\n"
+                       "2 - Consultar Todos os Jogos\n"
+                       "0 - Sair\n"
+                       "Opção escolhida: ")
+        if option == "1":
+            jogo.gerar_jogo()
+        elif option == "2":
+            jogo.exibir_jogos()
 
     elif option == "6":
         option = input("\n1 - Comprar Ingresso\n"
-                       "2 - Consultar Compras\n"
+                       "2 - Consultar Todas as Compras\n"
                        "0 - Sair\n"
                        "Opção escolhida: ")
 
         if option == "1":
             compra.comprar()
         elif option == "2":
-            opcao = input("\n1 - Consultar todas as compras\n"
-                          "2 - Consulta personalizada\n"
-                          "Informe qualquer outro caractere para voltar\n"
-                          "Opção escolhida: ")
-            if opcao == "1":
-                compra.consultar_compra(True)
-            elif opcao == "2":
-                compra.consultar_compra(False)
-        else:
-            continue
+            compra.consultar_compras()
 
     elif option == "0":
         break

@@ -13,7 +13,7 @@ def exibir_torcedores():
         print(" - CPF: %s" % x.get("cpf"))
         print(" - Nome: %s" % x.get("nome"))
         print(" - Idade: %s" % x.get("idade"))
-        print(" - Clube do torcedor: " % x.get("clube"))
+        print(" - Clube do torcedor: %s" % x.get("clube"))
         print("----------------------------------------------------------------------------------------------")
 
 

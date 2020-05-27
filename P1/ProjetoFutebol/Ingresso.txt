@@ -1,14 +1,14 @@
 --------------------- INGRESSO ---------------------
 ****************** DADOS DO JOGO ******************
-palmeiras X corinthans
-Estádio: Old Trafford
-Cidade: Manchester - País: Inglaterra
-Descrição do jogo: Brasileirão Série A
+Real Madrid X São Paulo
+Estádio: Fonte Luminosa
+Cidade: Araraquara - País: Brasil
+Descrição do jogo: Mundial Interclubes 2020 - FINAL
 **************** DADOS DO COMPRADOR ****************
-Torcedor: leo
-CPF: 123
+Torcedor: Leonardo Ignácio Martins
+CPF: 12345
 Idade: 22
 **************** DADOS DO INGRESSO *****************
-Código: 5ecd6fd6d111d1b65d54b3be
-Setor da arquibancada: verde
-Preço total: R$20
+Código: 5ecea7e55c16d129c334d2d6
+Setor da arquibancada: Camarote
+Preço total: R$500

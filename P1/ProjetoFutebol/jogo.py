@@ -29,7 +29,6 @@ def validar_cadastros_realizados():
         quantclube_b = 0
         for item in list_item:
             quantclube_b += 1
-        print("Quantclube_b de ", clube_as[i], " cadastrados: ", str(quantclube_b))
         if clube_as[i] == "clubes" and quantclube_b < 2:
             print("É necessário cadastrar no mínimo 2 clubes para prosseguir!")
             return False
@@ -37,7 +36,6 @@ def validar_cadastros_realizados():
             print("É necessário cadastrar no mínimo 1 estádio para prosseguir!")
             return False
         i += 1
-    print("Cadastros validados com sucesso")
     return True
 
 
@@ -94,7 +92,7 @@ class Jogo:
             jogo = {"descricao": self.descricao, "clube_a": self.clube_a[0],
                     "clube_b": self.clube_b[0], "estadio": self.estadio[0]}
             mycolJogo.insert_one(jogo)
-            return print("Jogo gerado com sucesso!")
+            return print("Jogo cadastrado com sucesso!")
 
     @staticmethod
     def exibir_jogos():

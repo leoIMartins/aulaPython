@@ -12,7 +12,7 @@ def exibir_clubes():
         print("ID: %s" % x.get("_id"))
         print(" - Nome: %s" % x.get("nome"))
         print(" - Técnico: %s" % x.get("tecnico"))
-        print(" - Número de títulos: " % x.get("numero_titulos"))
+        print(" - Número de títulos: %s" % x.get("numero_titulos"))
         print("----------------------------------------------------------------------------------------------")
 
 

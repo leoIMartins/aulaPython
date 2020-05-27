@@ -13,17 +13,11 @@ torcedor = Torcedor()
 ingresso = Ingresso()
 
 
-def exibir_compras():
-    compras_cadastradas = mycolCompra.find()
-    for c in compras_cadastradas:
-        print(c)
-
-
 def validar_cadastros_realizados():
     i = 0
     lista = []
     verificacoes = ["ingressos", "torcedores"]
-    ingressos_cadastrados = mycolIngresso.find({"vendido": "Nao"})
+    ingressos_cadastrados = mycolIngresso.find({"vendido": "Não"})
     torcedores_cadastrados = mycolTorcedor.find()
     lista.append(ingressos_cadastrados)
     lista.append(torcedores_cadastrados)
@@ -31,7 +25,6 @@ def validar_cadastros_realizados():
         quantidade = 0
         for item in list_item:
             quantidade += 1
-        print("Quantidade de ", verificacoes[i], " cadastrados: ", str(quantidade))
         if verificacoes[i] == "ingressos" and quantidade < 1:
             print("É necessário cadastrar no mínimo 1 ingresso para prosseguir!")
             return False
@@ -110,20 +103,24 @@ class Compra:
             ingresso_jogo.write("Setor da arquibancada: %s\n" % setor_ingresso)
             ingresso_jogo.write("Preço total: R$%s" % preco_ingresso)
 
-            print("Ingresso gerado com sucesso")
+            print("Ingresso gerado com sucesso!")
             ingresso_jogo.close()
 
     @staticmethod
-    def consultar_compra(tudo):
-        if tudo:
-            compras_cadastradas = mycolCompra.find()
-            for c in compras_cadastradas:
-                print(c)
-        else:
-            filtro = {input(
-                "\nInforme o atributo (exatamente como está abaixo) da compra a ser utilizado como"
-                " parâmetro na consulta:\n"
-                "torcedor || ingresso\n"
-                "Atributo escolhido: "): input("Informe o valor do atributo a ser pesquisado: ")}
-            for c in mycolCompra.find(filtro):
-                print(c)
+    def consultar_compras():
+        print("\n")
+        for x in mycolCompra.find():
+            torcedor_dados = dict(x).get("torcedor")
+            ingresso_dados = dict(x).get("ingresso")
+            jogo_dados = dict(ingresso_dados).get("jogo")
+            estadio_dados = dict(jogo_dados).get("estadio")
+            clube_a = dict(jogo_dados).get("clube_a")
+            clube_b = dict(jogo_dados).get("clube_b")
+
+            print("ID da compra: %s" % x.get("_id"))
+            print(" - Nome do torcedor: %s" % torcedor_dados.get("nome"))
+            print(" - CPF do torcedor: %s" % torcedor_dados.get("cpf"))
+            print(" - Código do ingresso: %s" % ingresso_dados.get("_id"))
+            print(" - %s X %s" % (clube_a.get("nome"), clube_b.get("nome")))
+            print(" - Estádio: %s" % estadio_dados.get("nome"))
+            print("----------------------------------------------------------------------------------------------")

@@ -23,7 +23,7 @@ def exibir_ingressos():
         print(" - Descrição do jogo: %s" % jogo_dados.get("descricao"))
         print(" - %s X %s" % (clube_a.get("nome"), clube_b.get("nome")))
         print(" - Estádio: %s" % estadio.get("nome"))
-        print(" - Disponível: %s" % x.get("vendido"))
+        print(" - Vendido: %s" % x.get("vendido"))
         print("----------------------------------------------------------------------------------------------")
 
 
@@ -32,11 +32,9 @@ def validar_cadastros_realizados():
     jogos_cadastrados = mycolJogo.find()
     for j in jogos_cadastrados:
         quantidade_jogos += 1
-    print("Jogos cadastrados: ", str(quantidade_jogos))
     if quantidade_jogos < 1:
         print("É necessário cadastrar no mínimo 1 jogo para prosseguir!")
         return False
-    print("Cadastros validados com sucesso")
     return True
 
 
@@ -78,13 +76,13 @@ class Ingresso:
                 if quantidade < 1:
                     print("Informe uma quantidade maior que 0")
             for q in range(quantidade):
-                ingresso = {"preco": self.preco, "setor": self.setor, "jogo": self.jogo[0], "vendido": "Nao"}
+                ingresso = {"preco": self.preco, "setor": self.setor, "jogo": self.jogo[0], "vendido": "Não"}
                 mycolIngresso.insert_one(ingresso)
 
             return print("Ingresso(s) incluído(s) com sucesso!")
 
     @staticmethod
-    def excluir_ingresso(tudo):
+    def excluir_ingressos():
         mycolIngresso.delete_many({})
         return print("Ingresso(s) excluído(s) com sucesso!")
 
@@ -92,7 +90,7 @@ class Ingresso:
     def consultar_ingresso(disponivel):
         print("\n")
         if disponivel:
-            ingressos_cadastrados = mycolIngresso.find({"vendido": "Nao"}, {"vendido": 0})
+            ingressos_cadastrados = mycolIngresso.find({"vendido": "Não"}, {"vendido": 0})
         else:
             ingressos_cadastrados = mycolIngresso.find()
         for x in ingressos_cadastrados:
@@ -107,5 +105,5 @@ class Ingresso:
             print(" - %s X %s" % (clube_a.get("nome"), clube_b.get("nome")))
             print(" - Estádio: %s" % estadio.get("nome"))
             if not disponivel:
-                print(" - Disponível: %s" % x.get("vendido"))
+                print(" - Vendido: %s" % x.get("vendido"))
             print("----------------------------------------------------------------------------------------------")

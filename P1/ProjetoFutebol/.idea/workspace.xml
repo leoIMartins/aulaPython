@@ -5,9 +5,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Ingresso.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Ingresso.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clube.py" beforeDir="false" afterPath="$PROJECT_DIR$/clube.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/estadio.py" beforeDir="false" afterPath="$PROJECT_DIR$/estadio.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compra.py" beforeDir="false" afterPath="$PROJECT_DIR$/compra.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ingresso.py" beforeDir="false" afterPath="$PROJECT_DIR$/ingresso.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jogo.py" beforeDir="false" afterPath="$PROJECT_DIR$/jogo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teste.py" beforeDir="false" afterPath="$PROJECT_DIR$/teste.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/torcedor.py" beforeDir="false" afterPath="$PROJECT_DIR$/torcedor.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -167,22 +168,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1590172926280" />
-    <state width="1515" height="322" key="GridCell.Tab.0.bottom" timestamp="1590521758247">
+    <state width="1515" height="364" key="GridCell.Tab.0.bottom" timestamp="1590602543146">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="322" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1590521758247" />
-    <state width="1515" height="322" key="GridCell.Tab.0.center" timestamp="1590521758247">
+    <state width="1515" height="364" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1590602543146" />
+    <state width="1515" height="364" key="GridCell.Tab.0.center" timestamp="1590602543146">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="322" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1590521758247" />
-    <state width="1515" height="322" key="GridCell.Tab.0.left" timestamp="1590521758247">
+    <state width="1515" height="364" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1590602543146" />
+    <state width="1515" height="364" key="GridCell.Tab.0.left" timestamp="1590602543146">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="322" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1590521758247" />
-    <state width="1515" height="322" key="GridCell.Tab.0.right" timestamp="1590521758247">
+    <state width="1515" height="364" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1590602543146" />
+    <state width="1515" height="364" key="GridCell.Tab.0.right" timestamp="1590602543146">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="322" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1590521758247" />
+    <state width="1515" height="364" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1590602543146" />
     <state width="1515" height="261" key="GridCell.Tab.1.bottom" timestamp="1590520595784">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -203,25 +204,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1590090646322" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1590466152752">
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1590601589453">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1590466152752" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/jogo.py</url>
-          <line>75</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/jogo.py</url>
-          <line>96</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1590601589453" />
   </component>
 </project>
