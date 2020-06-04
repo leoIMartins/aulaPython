@@ -1,14 +1,14 @@
 --------------------- INGRESSO ---------------------
 ****************** DADOS DO JOGO ******************
-Real Madrid X São Paulo
+São Paulo X Real Madrid
 Estádio: Fonte Luminosa
 Cidade: Araraquara - País: Brasil
-Descrição do jogo: Mundial Interclubes 2020 - FINAL
+Descrição do jogo: Mundial Interclubes - FINAL
 **************** DADOS DO COMPRADOR ****************
-Torcedor: Leonardo Ignácio Martins
-CPF: 12345
+Torcedor: Leonardo Martins
+CPF: 123456
 Idade: 22
 **************** DADOS DO INGRESSO *****************
-Código: 5ecea7e55c16d129c334d2d6
+Código: 5ecefb31dc809eb4a8f6b7bb
 Setor da arquibancada: Camarote
 Preço total: R$500
