@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <ul>
+        {% for comida in comidas %}
+            <a href="{% url 'update_comida' comida.id %}">
+                <li> {{ comida.data }} - {{ comida.descricao }} </li>
+            </a>
+        {% endfor %}
+    </ul>
+
+    <a class="btn btn-primary" href="{% url 'create_comida' %}">Novo</a>
+{% endblock %}
