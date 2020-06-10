@@ -15,7 +15,7 @@ def create_comida(request):
         form.save()
         return redirect('list_comida')
 
-    return render(request, 'agenda-form.html', {'form': form})
+    return render(request, 'comida-form.html', {'form': form})
 
 
 def update_comida(request, id):
