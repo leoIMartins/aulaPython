@@ -4,10 +4,22 @@
       <form method="POST" novalidate>
         {% csrf_token %}
           <div class="form-group">
-            {{ form.data |as_crispy_field }}
+            {{ form.tipoComida |as_crispy_field }}
           </div>
           <div class="form-group">
-            {{ form.descricao |as_crispy_field  }}
+            {{ form.descricao |as_crispy_field }}
+          </div>
+          <div class="form-group">
+            {{ form.quantidade |as_crispy_field }}
+          </div>
+          <div class="form-group">
+            {{ form.opcoes |as_crispy_field }}
+          </div>
+          <div class="form-group">
+            {{ form.valorCalorico |as_crispy_field }}
+          </div>
+          <div class="form-group">
+            {{ form.salada |as_crispy_field }}
           </div>
           <button type="submit" class="btn btn-success">Salvar</button>
             {% if comida %}
